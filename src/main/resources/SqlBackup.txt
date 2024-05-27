@@ -1,0 +1,34 @@
+CREATE SCHEMA `teaching_spring_boot` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE `teaching_spring_boot`.`person` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `age` INT NULL,
+  `has_military_service` TINYINT NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `teaching_spring_boot`.`person`
+CHANGE COLUMN `hasMilitaryService` `has_military_service` TINYINT NULL DEFAULT NULL ;
+
+CREATE TABLE `teaching_spring_boot`.`car` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `brand` VARCHAR(50) NULL,
+  `model` VARCHAR(50) NULL,
+  `year` INT NULL,
+  `color` VARCHAR(30) NULL,
+  `person_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `car_fk1_idx` (`person_id` ASC) VISIBLE,
+  CONSTRAINT `car_fk1`
+    FOREIGN KEY (`person_id`)
+    REFERENCES `teaching_spring_boot`.`person` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+
+INSERT INTO `teaching_spring_boot`.`person` (`name`, `age`, `hasMilitaryService`) VALUES ('Tom', '25', '0');
+INSERT INTO `teaching_spring_boot`.`person` (`name`, `age`, `hasMilitaryService`) VALUES ('Said', '22', '1');
+
+INSERT INTO `teaching_spring_boot`.`person` (`id`, `name`, `age`, `hasMilitaryService`) VALUES ('5', 'Nader', '23', '1');
